@@ -1,0 +1,28 @@
+{
+  "name": "vue-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wonderfulMan/vue-template.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wonderfulMan/vue-template/issues"
+  },
+  "homepage": "https://github.com/wonderfulMan/vue-template#readme",
+  "devDependencies": {
+    "@realive/eslint-config-base": "^1.1.0",
+    "@realive/eslint-config-prettier": "^1.1.0",
+    "eslint": "^8.11.0",
+    "execa": "5.0.0",
+    "prettier": "^2.5.1",
+    "semver": "^7.3.5"
+  }
+}
