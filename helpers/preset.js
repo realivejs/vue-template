@@ -7,6 +7,7 @@ const {
   UI_PACKAGES,
   COMMON_PACKAGES,
   MOBILE_PACKAGES,
+  TAILWIND_CSS_PACKAGES,
 } = require("../constants");
 
 const { hasTs } = require("./check");
@@ -33,12 +34,18 @@ function mergePackages(basePkgs, extendPkgs) {
 
 /**
  * 根据prompt回答获取预设package
- * @param {{templateType: string, needCompositionApi: boolean, needPinia: boolean, uiFramework: string }} options
+ * @param {{templateType: string, needCompositionApi: boolean, needPinia: boolean, needTailwindCss: boolean, uiFramework: string }} options
  * @returns {{dependencies: JSON, devDependencies: JSON}}
  */
 function getPresetPackages(options) {
-  const { templateType, needCompositionApi, needPinia, uiFramework, isMobile } =
-    options;
+  const {
+    templateType,
+    needCompositionApi,
+    needPinia,
+    needTailwindCss,
+    uiFramework,
+    isMobile,
+  } = options;
   const baseType = `vue-v${templateType.match(/\d/)[0]}`;
 
   let basePkgs = BASE_PACKAGES[baseType];
@@ -64,6 +71,10 @@ function getPresetPackages(options) {
     basePkgs = mergePackages(basePkgs, PINIA_PACKAGES);
   }
 
+  if (needTailwindCss) {
+    basePkgs = mergePackages(basePkgs, TAILWIND_CSS_PACKAGES);
+  }
+
   if (uiFramework) {
     basePkgs = mergePackages(basePkgs, UI_PACKAGES[uiFramework]);
   }
@@ -80,14 +91,18 @@ function getPresetPackages(options) {
 /**
  * 初始化命令
  * @param {string} cwd
+ * @param {{templateType: string, needCompositionApi: boolean, needPinia: boolean, needTailwindCss: boolean, uiFramework: string }} options
  * @returns {void}
  */
-function initCommand(cwd) {
+function initCommand(cwd, options) {
+  const { needTailwindCss } = options;
+
   run("yarn", ["run", "lint:all"], { cwd });
 
   run("npx", ["husky", "add", ".husky/pre-commit", "npm run lint:all"], {
     cwd,
   });
+
   run(
     "npx",
     [
@@ -100,6 +115,10 @@ function initCommand(cwd) {
       cwd,
     }
   );
+
+  if (needTailwindCss) {
+    run("vue", ["add", "vue-cli-plugin-windicss"]);
+  }
 }
 
 module.exports = {

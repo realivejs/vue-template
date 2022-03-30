@@ -32,6 +32,12 @@ const COMPOSITION_API_PACKAGES = {
   },
 };
 
+const TAILWIND_CSS_PACKAGES = {
+  devDependencies: {
+    postcss: "8",
+  },
+};
+
 const PINIA_PACKAGES = {
   dependencies: {
     pinia: "^2.0.12",
@@ -103,6 +109,7 @@ const MOBILE_PACKAGES = {
 module.exports = {
   BASE_PACKAGES,
   COMPOSITION_API_PACKAGES,
+  TAILWIND_CSS_PACKAGES,
   PINIA_PACKAGES,
   UI_PACKAGES,
   COMMON_PACKAGES,

@@ -35,7 +35,7 @@ module.exports = (api, options) => {
   });
 
   api.onCreateComplete(() => {
-    initCommand(process.cwd());
+    initCommand(process.cwd(), options);
   });
 };
 

@@ -37,20 +37,37 @@ module.exports = (pkg) => {
       ],
     },
 
+    // todo
+    // {
+    //   type: "list",
+    //   name: "needPinia",
+    //   message: "选择你的状态管理工具",
+    //   choices: [
+    //     {
+    //       name: "vuex",
+    //       value: false,
+    //       checked: true,
+    //     },
+    //     {
+    //       name: "pinia",
+    //       value: true,
+    //     },
+    //   ],
+    // },
+
     {
       type: "list",
-      name: "needPinia",
-      message: "选择你的状态管理工具",
-      when: (answers) => isVue3(answers.templateType),
+      name: "needTailwindCss",
+      message: "是否使用tailwind.css",
       choices: [
         {
-          name: "vuex",
-          value: false,
+          name: "是",
+          value: true,
           checked: true,
         },
         {
-          name: "pinia",
-          value: true,
+          name: "否",
+          value: false,
         },
       ],
     },
