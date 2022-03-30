@@ -93,7 +93,7 @@ function injectMobileAdaptive(api, options) {
 function injectPkgScripts(options) {
   const { templateType } = options;
   const scripts = {
-    prepare: "husky install",
+    // prepare: "husky install",
     "lint:style": "stylelint '**/*.{css,html,vue}' --fix",
     "lint:script": "eslint '**/*.{js,vue,json}' --fix",
     "lint:all": "yarn run lint:script && yarn run lint:style",

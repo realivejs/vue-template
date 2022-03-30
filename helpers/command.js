@@ -1,11 +1,11 @@
-const execa = require("execa");
+const { spawn } = require("child_process");
 
 function run(command, args, options) {
   if (!args) {
     [command, ...args] = command.split(/\s+/);
   }
 
-  return execa(command, args, options);
+  return spawn(command, args, options);
 }
 
 module.exports = {
