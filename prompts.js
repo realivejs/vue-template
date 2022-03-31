@@ -78,11 +78,11 @@ module.exports = (pkg) => {
       message: "选择你需要的ui框架",
       choices: [
         {
-          name: "view-design（iview）for pc",
+          name: "view-design@4.7.0（iview）for pc",
           value: IVIEW,
         },
         {
-          name: "vant-ui for mobile",
+          name: "vant-ui@2.6.11 for mobile",
           value: VANT,
         },
       ],
