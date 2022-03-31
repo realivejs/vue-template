@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({})
+export const store = new Vuex.Store({})
 <%_ } _%>
 <%_ if (options.storeType === 'pinia') { _%>
 import Vue from 'vue'
