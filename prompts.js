@@ -41,7 +41,7 @@ module.exports = (pkg) => {
 
     // todo
     {
-      type: "checkbox",
+      type: "list",
       name: "storeType",
       message: "选择你的状态管理工具",
       choices: [
@@ -53,6 +53,10 @@ module.exports = (pkg) => {
           name: "pinia@2(如果使用typescript，建议选择)",
           value: PINIA,
           checked: true,
+        },
+        {
+          name: "none",
+          value: "",
         },
       ],
     },
@@ -75,7 +79,7 @@ module.exports = (pkg) => {
     },
 
     {
-      type: "checkbox",
+      type: "list",
       name: "uiFramework",
       message: "选择你需要的ui框架",
       choices: [
@@ -86,6 +90,10 @@ module.exports = (pkg) => {
         {
           name: "vant-ui@2 for mobile",
           value: VANT,
+        },
+        {
+          name: "none",
+          value: "",
         },
       ],
     },

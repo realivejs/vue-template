@@ -54,11 +54,11 @@ const VUEX_PACKAGES = {
 const BASE_PACKAGES = {
   [VUE_V2]: {
     dependencies: {
-      vue: "2.6.13",
+      vue: "2.6.14",
       "vue-router": "3.2.0",
     },
     devDependencies: {
-      "vue-template-compiler": "2.6.13",
+      "vue-template-compiler": "2.6.14",
       "@realive/eslint-config-vue-v2-normal": "^1.3.0",
     },
   },

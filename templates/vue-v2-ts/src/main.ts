@@ -11,6 +11,9 @@ import { pinia } from "@/store";
 import { store } from "@/store";
 <%_ } _%>
 import '@/assets/styles/index.less';
+<%_ if (options.needWindiCss) { _%>
+import 'windi.css';
+<%_ } _%>
 
 Vue.config.productionTip = false;
 <%_ if (options.needCompositionApi) { _%>
