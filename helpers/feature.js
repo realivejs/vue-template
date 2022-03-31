@@ -28,22 +28,25 @@ function writeFile(filename, content) {
  * @param {object} options prompt
  * @returns {void}
  */
-function injectComposition(api, options) {
+function injectMainFile(api, options) {
   const { needCompositionApi } = options;
 
   if (needCompositionApi) {
     // 注入main文件
     const mainContent = readFile(api.resolve(api.entryFile));
     const mainLines = mainContent.split(/\r?\n/g);
+
+    const lastImportIndex = mainLines.lastIndexOf("import");
     const targetIndex = mainLines.findIndex((line) =>
       line.match(/Vue.config.productionTip/)
     );
 
     mainLines.splice(
-      0,
+      lastImportIndex,
       0,
       'import VueCompsitionAPI from "@vue/composition-api";'
     );
+
     mainLines.splice(targetIndex + 1, 0, "Vue.use(VueCompsitionAPI);");
 
     writeFile(api.entryFile, mainLines);
@@ -57,9 +60,9 @@ function injectComposition(api, options) {
  * @returns {void}
  */
 function injectMobileAdaptive(api, options) {
-  const { isMobile } = options;
+  const { needMobileAdapter } = options;
 
-  if (isMobile) {
+  if (needMobileAdapter) {
     const htmlPath = "public/index.html";
     // 注入html文件
     const htmlContent = readFile(api.resolve(htmlPath));
@@ -107,7 +110,7 @@ function injectPkgScripts(options) {
 }
 
 module.exports = {
-  injectComposition,
+  injectMainFile,
   injectPkgScripts,
   injectMobileAdaptive,
 };

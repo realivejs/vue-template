@@ -57,8 +57,8 @@ module.exports = (pkg) => {
 
     {
       type: "list",
-      name: "needTailwindCss",
-      message: "是否使用tailwind.css",
+      name: "needWindiCss",
+      message: "是否使用windi.css",
       choices: [
         {
           name: "是",
@@ -90,7 +90,7 @@ module.exports = (pkg) => {
 
     {
       type: "list",
-      name: "isMobile",
+      name: "needMobileAdapter",
       message: "是否为移动端项目（自动添加meta、适配能力）",
       choices: [
         {

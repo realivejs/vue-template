@@ -1,5 +1,5 @@
 import { RouteConfig } from 'vue-router'
-import Example from '@/pages/example.vue' 
+import Example from '@/views/example.vue' 
 
 /**
  * @description
@@ -16,6 +16,6 @@ export const routes: Array<RouteConfig> = [
   {
     path: '/lazy-example',
     name: 'lazy-example',
-    component: () => import(/** lazyExample */'@/pages/example.vue')
+    component: () => import(/** lazyExample */'@/views/example.vue')
   }
 ]

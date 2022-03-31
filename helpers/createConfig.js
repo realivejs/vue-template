@@ -288,11 +288,23 @@ function createVsconfigSettingConfig(files) {
  * @returns {void}
  */
 function createPostcssConfig(files, options) {
-  const { isMobile } = options;
+  const { needMobileAdapter } = options;
 
-  files[".postcssrc.js"] = isMobile
+  files[".postcssrc.js"] = needMobileAdapter
     ? readConfigTemplate("postcss.mobile.config")
     : " ";
+}
+
+/**
+ * 创建browerlist配置文件
+ * @param {object} files
+ * @param {{templateType: string}} options
+ * @returns {void}
+ */
+function createBrowerlistConfig(files, options) {
+  const { needMobileAdapter } = options;
+  const tplName = needMobileAdapter ? "browerlistrc.mobile" : "browerlistrc.pc";
+  files[".browserslistrc"] = readConfigTemplate(tplName);
 }
 
 /**
@@ -311,12 +323,14 @@ function createConfig(files, options) {
   createEditorConfig(files);
   createLintstagedConfig(files);
   createPrettierConfig(files, options);
-  createVueConfigConfig(files);
   createEnvConfig(files);
   createVsconfigSettingConfig(files);
   createPostcssConfig(files, options);
+  createBrowerlistConfig(files, options);
 }
 
 module.exports = {
+  createVueConfigConfig,
+  readConfigTemplate,
   createConfig,
 };

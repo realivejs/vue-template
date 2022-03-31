@@ -34,7 +34,7 @@ function mergePackages(basePkgs, extendPkgs) {
 
 /**
  * 根据prompt回答获取预设package
- * @param {{templateType: string, needCompositionApi: boolean, needPinia: boolean, needTailwindCss: boolean, uiFramework: string }} options
+ * @param {{templateType: string, needCompositionApi: boolean, needPinia: boolean, needWindiCss: boolean, uiFramework: string }} options
  * @returns {{dependencies: JSON, devDependencies: JSON}}
  */
 function getPresetPackages(options) {
@@ -42,9 +42,9 @@ function getPresetPackages(options) {
     templateType,
     needCompositionApi,
     needPinia,
-    needTailwindCss,
+    needWindiCss,
     uiFramework,
-    isMobile,
+    needMobileAdapter,
   } = options;
   const baseType = `vue-v${templateType.match(/\d/)[0]}`;
 
@@ -71,7 +71,7 @@ function getPresetPackages(options) {
     basePkgs = mergePackages(basePkgs, PINIA_PACKAGES);
   }
 
-  if (needTailwindCss) {
+  if (needWindiCss) {
     basePkgs = mergePackages(basePkgs, TAILWIND_CSS_PACKAGES);
   }
 
@@ -79,7 +79,7 @@ function getPresetPackages(options) {
     basePkgs = mergePackages(basePkgs, UI_PACKAGES[uiFramework]);
   }
 
-  if (isMobile) {
+  if (needMobileAdapter) {
     basePkgs = mergePackages(basePkgs, MOBILE_PACKAGES);
   }
 
@@ -91,34 +91,22 @@ function getPresetPackages(options) {
 /**
  * 初始化命令
  * @param {string} cwd
- * @param {{templateType: string, needCompositionApi: boolean, needPinia: boolean, needTailwindCss: boolean, uiFramework: string }} options
+ * @param {{templateType: string, needCompositionApi: boolean, needPinia: boolean, needWindiCss: boolean, uiFramework: string }} options
  * @returns {void}
  */
-function initCommand(cwd, options) {
-  const { needTailwindCss } = options;
+function initCommand(cwd) {
+  run("yarn run lint:all", { cwd });
 
-  run("yarn", ["run", "lint:all"], { cwd });
-
-  run("npx", ["husky", "add", ".husky/pre-commit", "npm run lint:all"], {
+  run("npx husky add .husky/pre-commit npm run lint:all", {
     cwd,
   });
 
   run(
-    "npx",
-    [
-      "husky",
-      "add",
-      ".husky/commit-msg",
-      'npx --no-install commitlint --edit "$1"',
-    ],
+    'npx husky add .husky/commit-msg npx --no-install commitlint --edit "$1"',
     {
       cwd,
     }
   );
-
-  if (needTailwindCss) {
-    run("vue", ["add", "vue-cli-plugin-windicss"]);
-  }
 }
 
 module.exports = {

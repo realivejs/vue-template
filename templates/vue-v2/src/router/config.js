@@ -1,4 +1,4 @@
-import Example from '@/pages/example' 
+import Example from '@/views/example' 
 
 /**
  * @description
@@ -15,6 +15,6 @@ export const routes = [
   {
     path: '/lazy-example',
     name: 'lazy-example',
-    component: () => import(/** lazyExample */'@/pages/example')
+    component: () => import(/** lazyExample */'@/views/example')
   }
 ]

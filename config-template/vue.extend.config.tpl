@@ -1,5 +1,9 @@
 const path = require('path');
-const eslintWebpackPlugin = require("eslint-webpack-plugin");
+
+const EslintWebpackPlugin = require("eslint-webpack-plugin");
+<%_ if (options.needWindiCss) { _%>
+const WindiCSSWebpackPlugin = require("windicss-webpack-plugin");
+<%_ } _%>
 
 /**
  * 配置eslint（vue-cli内置的eslint版本太低，为了满足其他插件升级，重新配置）
@@ -9,7 +13,7 @@ const eslintWebpackPlugin = require("eslint-webpack-plugin");
 function setEslintFormat(config) {
   const cwd = process.cwd();
 
-  config.plugin('eslint').use(eslintWebpackPlugin, [
+  config.plugin('eslint').use(EslintWebpackPlugin, [
     {
       extensions: ['.js', '.jsx', '.vue'],
       cwd,
@@ -23,6 +27,28 @@ function setEslintFormat(config) {
     },
   ]);
 }
+
+<%_ if (options.needWindiCss) { _%>
+/**
+ * 配置windicss
+ * @param {object} config
+ * @returns {void}
+ */
+function setWindicssPlugin(config) {
+  const cwd = process.cwd();
+  config.plugin('windicss').use(WindiCSSWebpackPlugin, [{
+    root: cwd,
+    scan: {
+      dirs: ['src', 'public', 'views'],
+      exclude: [
+        'node_modules',
+        '.git',
+      ],
+      include: [],
+    },
+  }])
+}
+<%_ } _%>
 
 /**
  * @description 设置less变量注入到vue文件中
@@ -64,8 +90,8 @@ function extendDevServe() {
       },
     },
   } : {}
-  
 }
+
 
 /**
  * 配置需要经过babel编译的包
@@ -79,6 +105,9 @@ module.exports = {
   extendWebpack(config) {
     setEslintFormat(config);
     setGlobalLessVariates(config);
+    <%_ if (options.needWindiCss) { _%>
+    setWindicssPlugin(config);
+    <%_ } _%>
   },
   extendDependencies,
   extendDevServe,
