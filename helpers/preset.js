@@ -8,9 +8,10 @@ const {
   COMMON_PACKAGES,
   MOBILE_PACKAGES,
   WIND_CSS_PACKAGES,
+  VUEX_PACKAGES,
 } = require("../constants");
 
-const { hasTs } = require("./check");
+const { hasTs, isVuex, isPinia } = require("./check");
 const { run } = require("./command");
 
 /**
@@ -41,7 +42,7 @@ function getPresetPackages(options) {
   const {
     templateType,
     needCompositionApi,
-    needPinia,
+    storeType,
     needWindiCss,
     uiFramework,
     needMobileAdapter,
@@ -67,7 +68,11 @@ function getPresetPackages(options) {
     basePkgs = mergePackages(basePkgs, COMPOSITION_API_PACKAGES);
   }
 
-  if (needPinia) {
+  if (isVuex(storeType)) {
+    basePkgs = mergePackages(basePkgs, VUEX_PACKAGES);
+  }
+
+  if (isPinia(storeType)) {
     basePkgs = mergePackages(basePkgs, PINIA_PACKAGES);
   }
 

@@ -5,9 +5,11 @@ const {
   VUE_V3_TS,
   IVIEW,
   VANT,
+  VUEX,
+  PINIA,
 } = require("./constants");
 
-const { isVue2, isVue3 } = require("./helpers");
+const { isVue2 } = require("./helpers");
 
 module.exports = (pkg) => {
   const prompts = [
@@ -38,22 +40,22 @@ module.exports = (pkg) => {
     },
 
     // todo
-    // {
-    //   type: "list",
-    //   name: "needPinia",
-    //   message: "选择你的状态管理工具",
-    //   choices: [
-    //     {
-    //       name: "vuex",
-    //       value: false,
-    //       checked: true,
-    //     },
-    //     {
-    //       name: "pinia",
-    //       value: true,
-    //     },
-    //   ],
-    // },
+    {
+      type: "checkbox",
+      name: "storeType",
+      message: "选择你的状态管理工具",
+      choices: [
+        {
+          name: "vuex@3(vue官网store)",
+          value: VUEX,
+        },
+        {
+          name: "pinia@2(如果使用typescript，建议选择)",
+          value: PINIA,
+          checked: true,
+        },
+      ],
+    },
 
     {
       type: "list",
@@ -73,16 +75,16 @@ module.exports = (pkg) => {
     },
 
     {
-      type: "list",
+      type: "checkbox",
       name: "uiFramework",
       message: "选择你需要的ui框架",
       choices: [
         {
-          name: "view-design@4.7.0（iview）for pc",
+          name: "view-design@4（iview）for pc",
           value: IVIEW,
         },
         {
-          name: "vant-ui@2.6.11 for mobile",
+          name: "vant-ui@2 for mobile",
           value: VANT,
         },
       ],

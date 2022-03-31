@@ -45,11 +45,16 @@ const PINIA_PACKAGES = {
   },
 };
 
+const VUEX_PACKAGES = {
+  dependencies: {
+    vuex: "^3.6.2",
+  },
+};
+
 const BASE_PACKAGES = {
   [VUE_V2]: {
     dependencies: {
       vue: "2.6.13",
-      vuex: "3.6.2",
       "vue-router": "3.2.0",
     },
     devDependencies: {
@@ -115,4 +120,5 @@ module.exports = {
   UI_PACKAGES,
   COMMON_PACKAGES,
   MOBILE_PACKAGES,
+  VUEX_PACKAGES,
 };

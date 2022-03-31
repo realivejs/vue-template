@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const { IVIEW, VANT } = require("../constants");
 
-const { isVue2, hasTs, isVue3 } = require("./check");
+const { isVue2, hasTs, isVue3, isIviewUI, isVantUI } = require("./check");
 
 /**
  * 读取配置模版
@@ -68,7 +68,7 @@ function createBabelConfig(files, options) {
     plugins: [],
   };
 
-  if (IVIEW === uiFramework) {
+  if (isIviewUI(uiFramework)) {
     config.plugins.push([
       "import",
       {
@@ -78,7 +78,7 @@ function createBabelConfig(files, options) {
     ]);
   }
 
-  if (VANT === uiFramework) {
+  if (isVantUI(uiFramework)) {
     config.plugins.push([
       "import",
       {
