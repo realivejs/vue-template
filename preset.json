@@ -3,10 +3,10 @@
   "useTaobaoRegistry": true,
   "plugins": {
     "@vue/cli-plugin-babel": {
-      "version": "4.5.11"
+      "version": "5.0.4"
     },
     "@vue/cli-service": {
-      "version": "4.5.11"
+      "version": "5.0.4"
     }
   }
 }

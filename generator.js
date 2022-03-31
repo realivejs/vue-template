@@ -2,7 +2,6 @@ const {
   getPresetPackages,
   createConfig,
   initCommand,
-  injectMainFile,
   injectMobileAdaptive,
   injectPkgScripts,
 } = require("./helpers");
@@ -43,7 +42,6 @@ module.exports = (api, options) => {
 
 module.exports.hooks = (api, options) => {
   api.afterInvoke(() => {
-    injectMainFile(api, options);
     injectMobileAdaptive(api, options);
 
     api.exitLog("auto lint format 、git hooks add...", "info");

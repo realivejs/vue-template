@@ -1,6 +1,6 @@
 const fs = require("fs");
 const { EOL } = require("os");
-const { hasTs } = require("./check");
+const { hasTs, isVuex } = require("./check");
 
 /**
  * 读取文件
@@ -20,35 +20,6 @@ function readFile(pathname) {
  */
 function writeFile(filename, content) {
   fs.writeFileSync(filename, content.join(EOL), { encoding: "utf-8" });
-}
-
-/**
- * 注入composition
- * @param {object} api generator
- * @param {object} options prompt
- * @returns {void}
- */
-function injectMainFile(api, options) {
-  const { needCompositionApi } = options;
-
-  if (needCompositionApi) {
-    // 注入main文件
-    const mainContent = readFile(api.resolve(api.entryFile));
-    const mainLines = mainContent.split(/\r?\n/g);
-    const targetIndex = mainLines.findIndex((line) =>
-      line.match(/Vue.config.productionTip/)
-    );
-
-    mainLines.splice(
-      0,
-      0,
-      'import VueCompsitionAPI from "@vue/composition-api";'
-    );
-
-    mainLines.splice(targetIndex + 1, 0, "Vue.use(VueCompsitionAPI);");
-
-    writeFile(api.entryFile, mainLines);
-  }
 }
 
 /**
@@ -108,7 +79,6 @@ function injectPkgScripts(options) {
 }
 
 module.exports = {
-  injectMainFile,
   injectPkgScripts,
   injectMobileAdaptive,
 };

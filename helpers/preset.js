@@ -11,7 +11,7 @@ const {
   VUEX_PACKAGES,
 } = require("../constants");
 
-const { hasTs, isVuex, isPinia } = require("./check");
+const { hasTs, isVuex, isPinia, isVue2 } = require("./check");
 const { run } = require("./command");
 
 /**
@@ -41,15 +41,22 @@ function mergePackages(basePkgs, extendPkgs) {
 function getPresetPackages(options) {
   const {
     templateType,
-    needCompositionApi,
     storeType,
     needWindiCss,
     uiFramework,
     needMobileAdapter,
   } = options;
+
+  let { needCompositionApi } = options;
+
   const baseType = `vue-v${templateType.match(/\d/)[0]}`;
 
   let basePkgs = BASE_PACKAGES[baseType];
+
+  // vue2选择pinia必须安装composition-api
+  if (isVue2(templateType) && isPinia(storeType)) {
+    needCompositionApi = true;
+  }
 
   if (VUE_V2_TS === templateType) {
     delete basePkgs.devDependencies["@realive/eslint-config-vue-v2-normal"];
@@ -69,7 +76,9 @@ function getPresetPackages(options) {
   }
 
   if (isVuex(storeType)) {
-    basePkgs = mergePackages(basePkgs, VUEX_PACKAGES);
+    if (isVue2(templateType)) {
+      basePkgs = mergePackages(basePkgs, VUEX_PACKAGES);
+    }
   }
 
   if (isPinia(storeType)) {
