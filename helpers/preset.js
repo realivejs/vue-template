@@ -7,7 +7,7 @@ const {
   UI_PACKAGES,
   COMMON_PACKAGES,
   MOBILE_PACKAGES,
-  TAILWIND_CSS_PACKAGES,
+  WIND_CSS_PACKAGES,
 } = require("../constants");
 
 const { hasTs } = require("./check");
@@ -72,7 +72,7 @@ function getPresetPackages(options) {
   }
 
   if (needWindiCss) {
-    basePkgs = mergePackages(basePkgs, TAILWIND_CSS_PACKAGES);
+    basePkgs = mergePackages(basePkgs, WIND_CSS_PACKAGES);
   }
 
   if (uiFramework) {

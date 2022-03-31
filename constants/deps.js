@@ -28,13 +28,14 @@ const COMMON_PACKAGES = {
 
 const COMPOSITION_API_PACKAGES = {
   dependencies: {
-    "@vue/composition-api": "1.4.6",
+    "@vue/composition-api": "^1.4.6",
   },
 };
 
-const TAILWIND_CSS_PACKAGES = {
+const WIND_CSS_PACKAGES = {
   devDependencies: {
     postcss: "8",
+    "windicss-webpack-plugin": "^1.6.7",
   },
 };
 
@@ -109,7 +110,7 @@ const MOBILE_PACKAGES = {
 module.exports = {
   BASE_PACKAGES,
   COMPOSITION_API_PACKAGES,
-  TAILWIND_CSS_PACKAGES,
+  WIND_CSS_PACKAGES,
   PINIA_PACKAGES,
   UI_PACKAGES,
   COMMON_PACKAGES,

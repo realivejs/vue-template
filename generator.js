@@ -39,15 +39,14 @@ module.exports = (api, options) => {
     "scripts/extends.js": "./config-template/vue.extend.config.tpl",
     "vue.config.js": "./config-template/vue.config.tpl",
   });
-
-  api.onCreateComplete(() => {
-    initCommand(process.cwd());
-  });
 };
 
 module.exports.hooks = (api, options) => {
   api.afterInvoke(() => {
     injectMainFile(api, options);
     injectMobileAdaptive(api, options);
+
+    api.exitLog("auto lint format 、git hooks add...");
+    initCommand(process.cwd());
   });
 };
