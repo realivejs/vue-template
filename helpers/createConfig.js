@@ -20,7 +20,7 @@ function readConfigTemplate(templateName) {
 
 /**
  * 转换配置文件为jsonstring
- * @param {*} config
+ * @param {object} config
  * @returns
  */
 function transformConfigToJSONStr(config) {
@@ -30,7 +30,7 @@ function transformConfigToJSONStr(config) {
 /**
  * 根据prompt回答创建eslint配置文件
  * @param {object} files
- * @param {{templateType: string}} options
+ * @param {object} options
  * @returns {void}
  */
 function createEslintConfig(files, options) {
@@ -57,7 +57,7 @@ function createEslintConfig(files, options) {
 /**
  * 根据prompt回答创建babel配置文件
  * @param {object} files
- * @param {{templateType: string}} options
+ * @param {object} options
  * @returns {void}
  */
 function createBabelConfig(files, options) {
@@ -113,7 +113,7 @@ function createStylelintConfig(files) {
 /**
  * 根据模版类型创建typescript shim文件
  * @param {object} files
- * @param {{templateType: string}} options
+ * @param {object} options
  * @returns {void}
  */
 function createTsShimPolyfill(files, options) {
@@ -210,7 +210,7 @@ function createLintstagedConfig(files) {
 /**
  * 根据模版类型创建prettier配置文件
  * @param {object} files
- * @param {{templateType: string}} options
+ * @param {object} options
  * @returns {void}
  */
 function createPrettierConfig(files, options) {
@@ -284,13 +284,13 @@ function createVsconfigSettingConfig(files) {
 /**
  * 创建postcss.config配置文件
  * @param {object} files
- * @param {{templateType: string}} options
+ * @param {object} options
  * @returns {void}
  */
 function createPostcssConfig(files, options) {
   const { needMobileAdapter } = options;
 
-  files[".postcssrc.js"] = needMobileAdapter
+  files["postcss.config.js"] = needMobileAdapter
     ? readConfigTemplate("postcss.mobile.config")
     : " ";
 }
@@ -298,13 +298,29 @@ function createPostcssConfig(files, options) {
 /**
  * 创建browerlist配置文件
  * @param {object} files
- * @param {{templateType: string}} options
+ * @param {object} options
  * @returns {void}
  */
 function createBrowerlistConfig(files, options) {
   const { needMobileAdapter } = options;
   const tplName = needMobileAdapter ? "browerlistrc.mobile" : "browerlistrc.pc";
   files[".browserslistrc"] = readConfigTemplate(tplName);
+}
+
+/**
+ * 创建WindiCss配置文件
+ * @param {object} files
+ * @param {object} options
+ * @returns {void}
+ */
+function createWindiCssConfig(files, options) {
+  const { needWindiCss, templateType } = options;
+
+  if (needWindiCss) {
+    const configFileSuffix = hasTs(templateType) ? "ts" : "js";
+    files[`windi.config.${configFileSuffix}`] =
+      readConfigTemplate("windicss.config");
+  }
 }
 
 /**
@@ -327,10 +343,10 @@ function createConfig(files, options) {
   createVsconfigSettingConfig(files);
   createPostcssConfig(files, options);
   createBrowerlistConfig(files, options);
+  createWindiCssConfig(files, options);
 }
 
 module.exports = {
   createVueConfigConfig,
-  readConfigTemplate,
   createConfig,
 };

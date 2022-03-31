@@ -46,7 +46,7 @@ module.exports.hooks = (api, options) => {
     injectMainFile(api, options);
     injectMobileAdaptive(api, options);
 
-    api.exitLog("auto lint format 、git hooks add...");
+    api.exitLog("auto lint format 、git hooks add...", "info");
     initCommand(process.cwd());
   });
 };

@@ -8,8 +8,4 @@ export default {
 }
 </script>
 
-<style lang="less">
-body {
-  color: @error;
-}
-</style>
+<style lang="less"></style>

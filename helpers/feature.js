@@ -35,14 +35,12 @@ function injectMainFile(api, options) {
     // 注入main文件
     const mainContent = readFile(api.resolve(api.entryFile));
     const mainLines = mainContent.split(/\r?\n/g);
-
-    const lastImportIndex = mainLines.lastIndexOf("import");
     const targetIndex = mainLines.findIndex((line) =>
       line.match(/Vue.config.productionTip/)
     );
 
     mainLines.splice(
-      lastImportIndex,
+      0,
       0,
       'import VueCompsitionAPI from "@vue/composition-api";'
     );

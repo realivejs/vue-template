@@ -1,13 +1,14 @@
 <template>
-  <div class="example">Example-Page</div>
+  <div>Example Page</div>
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from '@vue/composition-api';
+
+export default defineComponent({
   name: 'Example'
-}
+})
+
 </script>
 
-<style>
-
-</style>
+<style lang="less" scoped></style>
