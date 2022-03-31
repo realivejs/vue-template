@@ -289,10 +289,9 @@ function createVsconfigSettingConfig(files) {
  */
 function createPostcssConfig(files, options) {
   const { needMobileAdapter } = options;
-
-  files["postcss.config.js"] = needMobileAdapter
-    ? readConfigTemplate("postcss.mobile.config")
-    : " ";
+  if (needMobileAdapter) {
+    files["postcss.config.js"] = readConfigTemplate("postcss.mobile.config");
+  }
 }
 
 /**
