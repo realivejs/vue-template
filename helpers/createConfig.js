@@ -121,15 +121,15 @@ function createTsShimPolyfill(files, options) {
 
   if (hasTs(templateType)) {
     if (isVue2(templateType)) {
-      files["shims-tsx.d.ts"] = readConfigTemplate("shims-tsx.d");
-      files["shims-vue.d.ts"] = readConfigTemplate("shims-vue2.d");
+      files["src/shims-tsx.d.ts"] = readConfigTemplate("shims-tsx.d");
+      files["src/shims-vue.d.ts"] = readConfigTemplate("shims-vue2.d");
     }
 
     if (isVue3(templateType)) {
-      files["shims-vue.d.ts"] = readConfigTemplate("shims-vue.d");
+      files["src/shims-vue.d.ts"] = readConfigTemplate("shims-vue.d");
     }
 
-    files["shims-global.d.ts"] = readConfigTemplate("shims-global.d");
+    files["src/shims-global.d.ts"] = readConfigTemplate("shims-global.d");
   }
 }
 

@@ -1,6 +1,6 @@
 const fs = require("fs");
 const { EOL } = require("os");
-const { hasTs, isVuex } = require("./check");
+const { hasTs } = require("./check");
 
 /**
  * 读取文件
