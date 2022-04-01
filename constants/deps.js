@@ -64,7 +64,8 @@ const BASE_PACKAGES = {
   },
   [VUE_V2_TS]: {
     devDependencies: {
-      typescript: "4.5.3",
+      typescript: "4.5.5",
+      "@vue/cli-plugin-typescript": "5.0.4",
       "@realive/eslint-config-vue-v2": "^1.1.0",
     },
   },
@@ -81,7 +82,8 @@ const BASE_PACKAGES = {
   },
   [VUE_V3_TS]: {
     devDependencies: {
-      typescript: "4.5.3",
+      typescript: "4.5.5",
+      "@vue/cli-plugin-typescript": "5.0.4",
       "@realive/eslint-config-vue": "^1.1.0",
     },
   },

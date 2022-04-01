@@ -11,7 +11,7 @@ const {
   VUEX_PACKAGES,
 } = require("../constants");
 
-const { hasTs, isVuex, isPinia, isVue2 } = require("./check");
+const { isVuex, isPinia, isVue2 } = require("./check");
 const { run } = require("./command");
 
 /**
@@ -65,10 +65,6 @@ function getPresetPackages(options) {
 
   if (VUE_V3_TS === templateType) {
     basePkgs = mergePackages(basePkgs, BASE_PACKAGES[VUE_V3_TS]);
-  }
-
-  if (hasTs(templateType)) {
-    basePkgs.devDependencies["@vue/cli-plugin-typescript"] = "4.5.11";
   }
 
   if (needCompositionApi) {
