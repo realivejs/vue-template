@@ -15,13 +15,18 @@ function setEslintFormat(config) {
 
   config.plugin('eslint').use(EslintWebpackPlugin, [
     {
+      <%_ if (options.templateType.includes('ts')) { _%>
+      extensions: ['.js', '.jsx', '.vue', '.ts', '.tsx'],
+      <%_ } _%>
+      <%_ if (!options.templateType.includes('ts')) { _%>
       extensions: ['.js', '.jsx', '.vue'],
+      <%_ } _%>
       cwd,
       context: cwd,
       threads: false,
       cache: true,
       eslintPath: require.resolve('eslint'),
-      formatter: 'codeframe',
+      formatter: 'stylish',
       emitWarning: true,
       fix: true,
     },
